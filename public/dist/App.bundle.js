@@ -143,7 +143,14 @@ function autocomplete(input, latInput, lngInput) {
 
   dropdown.addListener('place_changed', function () {
     var place = dropdown.getPlace();
+    latInput.value = place.geometry.location.lat();
+    lngInput.value = place.geometry.location.lng();
     console.log(place);
+  });
+  // if someone hits enter on the address field, don't submit the form
+  // http://keycode.info/ enter = 13
+  input.on('keydown', function (e) {
+    if (e.keycode === 13) e.preventDefault();
   });
 }
 
