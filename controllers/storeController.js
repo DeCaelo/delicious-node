@@ -91,3 +91,7 @@ exports.getStoreBySlug = async (req, res, next) => {
   if (!store) return next(); // app.js => 71 app.use('/', routes); next is 74 app.use(errorHandlers.notFound);
   res.render('store', { store, title: store.name });
 };
+
+exports.getStoreByTag = async (req, res) => {
+  res.send('it works!');
+};
