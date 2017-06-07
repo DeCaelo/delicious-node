@@ -85,3 +85,7 @@ exports.updateStore = async (req, res) => {
   res.redirect(`/stores/${store._id}/edit`);
   // Redirectthem to the store and tell thme it worked
 };
+
+exports.getStoreBySlug = async (req, res) => {
+  res.send('it works !');
+};
