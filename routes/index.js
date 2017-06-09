@@ -51,5 +51,6 @@ router.post(
   catchErrors(userController.updateAccount)
 );
 router.post('/account/forgot', catchErrors(authController.forgot));
+router.get('/account/reset/:reset', catchErrors(authController.reset));
 
 module.exports = router;
