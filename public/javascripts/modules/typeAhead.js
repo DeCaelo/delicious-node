@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 function searchResultsHTML(stores) {
   return stores
@@ -63,9 +63,14 @@ function typeAhead(search) {
       next = items[items.length - 1];
     } else if (e.keyCode === 13 && current.href) {
       window.location = current.href;
+      return;
     }
 
-    console.log(next);
+    //console.log(next);
+    if (current) {
+      current.classList.remove(activeClass);
+    }
+    next.classList.add(activeClass);
   });
 }
 

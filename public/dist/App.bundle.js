@@ -982,7 +982,12 @@ exports.$$ = $$;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var axios = __webpack_require__(12);
+
+var _axios = __webpack_require__(12);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function searchResultsHTML(stores) {
   return stores.map(function (store) {
@@ -1008,7 +1013,7 @@ function typeAhead(search) {
     // to remove when not match coffe
     searchResults.innerHTML = '';
 
-    axios.get('/api/search?q=' + this.value).then(function (res) {
+    _axios2.default.get('/api/search?q=' + this.value).then(function (res) {
       if (res.data.length) {
         searchResults.innerHTML = searchResultsHTML(res.data);
       }
@@ -1038,9 +1043,14 @@ function typeAhead(search) {
       next = items[items.length - 1];
     } else if (e.keyCode === 13 && current.href) {
       window.location = current.href;
+      return;
     }
 
-    console.log(next);
+    //console.log(next);
+    if (current) {
+      current.classList.remove(activeClass);
+    }
+    next.classList.add(activeClass);
   });
 }
 
