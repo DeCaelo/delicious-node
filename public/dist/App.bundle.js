@@ -1019,7 +1019,28 @@ function typeAhead(search) {
 
   // handle keyboard inputs
   searchInput.on('keyup', function (e) {
-    console.log(e.keyCode);
+    // if they aren't pressing up, down or enter, who cares!
+    if (![38, 40, 13].includes(e.keyCode)) {
+      return; // skip it
+    }
+    //console.log('Do something!');
+    var activeClass = 'search__result--active';
+    var current = search.querySelector('.' + activeClass);
+    var items = search.querySelectorAll('.search__result');
+    var next = void 0;
+    if (e.keyCode === 40 && current) {
+      next = current.nextElementSibling || items[0];
+    } else if (e.keyCode === 40) {
+      next = items[0];
+    } else if (e.keycode === 38 && current) {
+      next = current.previousElementSibling || items[items.length - 1];
+    } else if (e.keyCode == 38) {
+      next = items[items.length - 1];
+    } else if (e.keyCode === 13 && current.href) {
+      window.location = current.href;
+    }
+
+    console.log(next);
   });
 }
 
