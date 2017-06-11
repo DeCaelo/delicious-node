@@ -1016,6 +1016,11 @@ function typeAhead(search) {
       console.error(err);
     });
   });
+
+  // handle keyboard inputs
+  searchInput.on('keyup', function (e) {
+    console.log(e.keyCode);
+  });
 }
 
 exports.default = typeAhead;
