@@ -986,7 +986,7 @@ var axios = __webpack_require__(12);
 
 function searchResultsHTML(stores) {
   return stores.map(function (store) {
-    return '\n      <a href="/stores/' + store.slug + '" class="search__result">\n        <strong>' + store.name + '</strong>\n        <p>' + store.description + '</p>\n      </a>\n    ';
+    return '\n      <a href="/store/' + store.slug + '" class="search__result">\n        <strong>' + store.name + '</strong>\n      </a>\n    ';
   }).join('');
 }
 
@@ -1005,13 +1005,15 @@ function typeAhead(search) {
 
     // show the search results!
     searchResults.style.display = 'block';
+    // to remove when not match coffe
+    searchResults.innerHTML = '';
 
     axios.get('/api/search?q=' + this.value).then(function (res) {
       if (res.data.length) {
-        console.log('There is something to show!');
-        var html = searchResultsHTML(res.data);
-        console.log(html);
+        searchResults.innerHTML = searchResultsHTML(res.data);
       }
+    }).catch(function (err) {
+      console.error(err);
     });
   });
 }

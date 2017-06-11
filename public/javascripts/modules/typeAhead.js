@@ -4,9 +4,8 @@ function searchResultsHTML(stores) {
   return stores
     .map(store => {
       return `
-      <a href="/stores/${store.slug}" class="search__result">
+      <a href="/store/${store.slug}" class="search__result">
         <strong>${store.name}</strong>
-        <p>${store.description}</p>
       </a>
     `;
     })
@@ -28,14 +27,19 @@ function typeAhead(search) {
 
     // show the search results!
     searchResults.style.display = 'block';
+    // to remove when not match coffe
+    searchResults.innerHTML = '';
 
-    axios.get(`/api/search?q=${this.value}`).then(res => {
-      if (res.data.length) {
-        console.log('There is something to show!');
-        const html = searchResultsHTML(res.data);
-        console.log(html);
-      }
-    });
+    axios
+      .get(`/api/search?q=${this.value}`)
+      .then(res => {
+        if (res.data.length) {
+          searchResults.innerHTML = searchResultsHTML(res.data);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   });
 }
 
