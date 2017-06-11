@@ -991,7 +991,18 @@ function typeAhead(search) {
   var searchResults = search.querySelector('.search__results');
 
   searchInput.on('input', function () {
-    console.log(this.value);
+    // if there is no value, quit it!
+    if (!this.value) {
+      searchResults.style.display = 'none';
+      return; // stop
+    }
+
+    // show the search results!
+    searchResults.style.display = 'block';
+
+    axios.get('/api/search?q=' + this.value).then(function (res) {
+      console.log(res.data);
+    });
   });
 }
 
