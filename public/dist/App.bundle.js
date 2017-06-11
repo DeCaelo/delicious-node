@@ -1002,6 +1002,8 @@ function typeAhead(search) {
   var searchResults = search.querySelector('.search__results');
 
   searchInput.on('input', function () {
+    var _this = this;
+
     // if there is no value, quit it!
     if (!this.value) {
       searchResults.style.display = 'none';
@@ -1010,13 +1012,14 @@ function typeAhead(search) {
 
     // show the search results!
     searchResults.style.display = 'block';
-    // to remove when not match coffe
-    searchResults.innerHTML = '';
 
     _axios2.default.get('/api/search?q=' + this.value).then(function (res) {
       if (res.data.length) {
         searchResults.innerHTML = searchResultsHTML(res.data);
+        return;
       }
+      // tell them nothing cam back
+      searchResults.innerHTML = '<div class="search__result">No results for ' + _this.value + ' found!</div>';
     }).catch(function (err) {
       console.error(err);
     });

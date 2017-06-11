@@ -27,15 +27,17 @@ function typeAhead(search) {
 
     // show the search results!
     searchResults.style.display = 'block';
-    // to remove when not match coffe
-    searchResults.innerHTML = '';
 
     axios
       .get(`/api/search?q=${this.value}`)
       .then(res => {
         if (res.data.length) {
           searchResults.innerHTML = searchResultsHTML(res.data);
+          return;
         }
+        // tell them nothing cam back
+        searchResults.innerHTML = `<div class="search__result">No results for ${this
+          .value} found!</div>`;
       })
       .catch(err => {
         console.error(err);
