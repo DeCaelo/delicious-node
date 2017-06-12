@@ -2754,6 +2754,8 @@ function loadPlaces(map) {
     }
     // create a bounds
     var bounds = new google.maps.LatLngBounds();
+    // create infowindow
+    var infoWindow = new google.maps.InfoWindow();
 
     var markers = places.map(function (place) {
       var _place$location$coord = _slicedToArray(place.location.coordinates, 2),
@@ -2765,6 +2767,13 @@ function loadPlaces(map) {
       var marker = new google.maps.Marker({ map: map, position: position });
       marker.place = place;
       return marker;
+    });
+
+    // when someone clicks on a marker, show the details of that place
+    markers.forEach(function (marker) {
+      return marker.addListener('click', function () {
+        console.log(this);
+      });
     });
 
     // then zoom the map to fit all the markers perfectly
