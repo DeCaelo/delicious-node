@@ -2822,14 +2822,23 @@ var _axios = __webpack_require__(3);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _bling = __webpack_require__(2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ajaxHeart(e) {
+  var _this = this;
+
   e.preventDefault();
-  console.log('HEART ITTTTTT');
-  console.log(this);
   _axios2.default.post(this.action).then(function (res) {
-    console.log(res.data);
+    var isHearted = _this.heart.classList.toggle('heart__button--hearted');
+    (0, _bling.$)('.heart-count').textContent = res.data.hearts.length;
+    if (isHearted) {
+      _this.heart.classList.add('heart__button--float');
+      setTimeout(function () {
+        return _this.heart.classList.remove('heart__button--float');
+      }, 2500);
+    }
   }).catch(console.error);
 }
 
