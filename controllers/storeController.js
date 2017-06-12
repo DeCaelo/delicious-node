@@ -132,3 +132,7 @@ exports.searchStores = async (req, res) => {
     .limit(5);
   res.json(stores);
 };
+
+exports.mapStores = async (req, res) => {
+  res.json({ it: 'Worked!' });
+};

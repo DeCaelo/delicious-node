@@ -48,6 +48,8 @@ storeSchema.index({
   description: 'text',
 });
 
+storeSchema.index({ location: '2dsphere' });
+
 // autogenerate slug
 storeSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {
