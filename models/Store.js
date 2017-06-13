@@ -82,6 +82,24 @@ storeSchema.statics.getTagsList = function() {
   ]);
 };
 
+storeSchema.statics.getTopStores = function() {
+  return this.aggregate([
+    // lookup Stores and populate their reviews
+    {
+      $lookup: {
+        from: 'reviews',
+        localField: '_id',
+        foreignField: 'store',
+        as: 'reviews',
+      },
+    },
+    // filter for only items that have 2 or more reviews
+    // Add the average reviews field
+    // sort it by our new field, highest reviews first
+    // limit to at most 10
+  ]);
+};
+
 // find reviews where the stores _id property === reviews store property
 storeSchema.virtual('reviews', {
   ref: 'Review', // What model to link?
