@@ -43,7 +43,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  })
+  }),
 );
 
 // // Passport JS is what we use to handle our logins

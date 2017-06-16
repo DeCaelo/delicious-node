@@ -81,6 +81,7 @@ const config = {
   plugins: [
     // here is where we tell it to output our css to a separate file
     new ExtractTextPlugin('style.css'),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };
 // webpack is cranky about some packages using a soon to be deprecated API. shhhhhhh

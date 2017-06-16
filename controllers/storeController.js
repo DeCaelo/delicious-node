@@ -48,7 +48,7 @@ exports.createStore = async (req, res) => {
   const store = await new Store(req.body).save();
   req.flash(
     'success',
-    `Successfully Created ${store.name}. Care to leave a review?`
+    `Successfully Created ${store.name}. Care to leave a review?`,
   );
   res.redirect(`/store/${store.slug}`);
 };
@@ -69,7 +69,7 @@ exports.getStores = async (req, res) => {
   if (!stores.length && skip) {
     req.flash(
       'info',
-      `Hey! You asked for page ${page}. But that doesn't exist. So I put you on page ${pages}`
+      `Hey! You asked for page ${page}. But that doesn't exist. So I put you on page ${pages}`,
     );
     res.redirect(`/stores/page/${pages}`);
     return;
@@ -103,11 +103,11 @@ exports.updateStore = async (req, res) => {
     {
       new: true, // return the new store instead of the old one
       runValidators: true,
-    }
+    },
   ).exec();
   req.flash(
     'success',
-    `Successfully updated <strong>${store.name}</strong>. <a href="/stores/${store.slug}">View Store -></a>`
+    `Successfully updated <strong>${store.name}</strong>. <a href="/stores/${store.slug}">View Store -></a>`,
   );
   res.redirect(`/stores/${store._id}/edit`);
   // Redirectthem to the store and tell thme it worked
@@ -115,7 +115,7 @@ exports.updateStore = async (req, res) => {
 
 exports.getStoreBySlug = async (req, res, next) => {
   const store = await Store.findOne({ slug: req.params.slug }).populate(
-    'author reviews'
+    'author reviews',
   );
   if (!store) return next(); // app.js => 71 app.use('/', routes); next is 74 app.use(errorHandlers.notFound);
   res.render('store', { store, title: store.name });
@@ -142,7 +142,7 @@ exports.searchStores = async (req, res) => {
       },
       {
         score: { $meta: 'textScore' },
-      }
+      },
     )
     // the sort them
     .sort({
@@ -187,7 +187,7 @@ exports.heartStore = async (req, res) => {
     {
       [operator]: { hearts: req.params.id },
     },
-    { new: true }
+    { new: true },
   );
   res.json(user);
 };

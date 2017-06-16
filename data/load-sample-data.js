@@ -12,7 +12,7 @@ const User = require('../models/User');
 
 const stores = JSON.parse(fs.readFileSync(__dirname + '/stores.json', 'utf-8'));
 const reviews = JSON.parse(
-  fs.readFileSync(__dirname + '/reviews.json', 'utf-8')
+  fs.readFileSync(__dirname + '/reviews.json', 'utf-8'),
 );
 const users = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'utf-8'));
 
@@ -22,7 +22,7 @@ async function deleteData() {
   await Review.remove();
   await User.remove();
   console.log(
-    'Data Deleted. To load sample data, run\n\n\t npm run sample\n\n'
+    'Data Deleted. To load sample data, run\n\n\t npm run sample\n\n',
   );
   process.exit();
 }
@@ -36,7 +36,7 @@ async function loadData() {
     process.exit();
   } catch (e) {
     console.log(
-      '\n👎👎👎👎👎👎👎👎 Error! The Error info is below but if you are importing sample data make sure to drop the existing database first with.\n\n\t npm run blowitallaway\n\n\n'
+      '\n👎👎👎👎👎👎👎👎 Error! The Error info is below but if you are importing sample data make sure to drop the existing database first with.\n\n\t npm run blowitallaway\n\n\n',
     );
     console.log(e);
     process.exit();
